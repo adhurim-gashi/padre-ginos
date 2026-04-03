@@ -1,25 +1,22 @@
-import { StrictMode, useState } from "react";
-import { CartContext } from "./contexts";
-import { createRoot } from "react-dom/client"; 
-import Order from "./Order";
-import PizzaOfTheDay from "./PizzaOfTheDay";
-import Header from "./Header";
-const App = () => {
-    const cartHook = useState([]);
-    return (
-        <StrictMode>
-        <CartContext.Provider value={cartHook}>
-        <div>
-           <Header />
-           <Order />
-           <PizzaOfTheDay />
-        </div>
-        </CartContext.Provider>
-        </StrictMode>
-    )
-}
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { routeTree } from "./routeTree.gen";
 
+const router = createRouter( { routeTree }); 
+const queryClient = new QueryClient(); 
+
+const App = () => {
+return (
+    <StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}/> 
+        </QueryClientProvider>
+    </StrictMode>
+);
+}; 
 
 const container = document.getElementById("root"); 
-const root = createRoot(container); 
-root.render(<App />); 
+const root = createRoot(container);
+root.render(<App />)
