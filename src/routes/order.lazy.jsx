@@ -10,7 +10,7 @@ const intl = new Intl.NumberFormat("de-DE", {
 });
 
 export const Route = createLazyFileRoute("/order")({
-  component: Order
+  component: Order,
 })
 
 export default function Order() {
