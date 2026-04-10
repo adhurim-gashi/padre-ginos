@@ -13,6 +13,7 @@ function ContactRoute() {
             return postContact(
                 formData.get("name"),
                 formData.get("email"),
+                formData.get("message")
             );
         },
     })
